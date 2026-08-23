@@ -1,6 +1,4 @@
-CATO: Context-Aware Tool Orchestrator
-
-### *Adaptive Financial Misinformation Detection via Evidence-Propagation DAGs*
+### *CATO: Context-Aware Tool Orchestration for Detecting Financial Misinformation via Evidence-Propagation DAGs*
 
 **CATO** (Context-Aware Tool Orchestrator) is an agentic framework for detecting financial misinformation. It dynamically composes analytical pathways with a metacognitive planner, executes a task-specific **Directed Acyclic Graph (DAG)** of specialized verification tools, and fuses multi-source evidence under uncertainty to produce an auditable verdict.
 
