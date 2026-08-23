@@ -1,124 +1,117 @@
-# CATO: Context-Aware Tool Orchestrator
+CATO: Context-Aware Tool Orchestrator
 
-### *Adaptive Financial Misinformation Detection via Evidence Propagation DAG*
+### *Adaptive Financial Misinformation Detection via Evidence-Propagation DAGs*
 
-[](https://www.google.com/search?q=https://www.python.org/downloads/)
-[](https://www.google.com/search?q=https://opensource.org/licenses/MIT)
-[](https://www.google.com/search?q=%23)
-
-**CATO** (Context-Aware Tool Orchestrator) is a sophisticated agentic framework designed to tackle the unique challenges of financial misinformation—such as semantic subtlety, knowledge dynamism, and rhetorical manipulation. By dynamically orchestrating a specialized suite of 10 tools through a **Metacognitive Planner**, CATO moves beyond static RAG pipelines to provide verifiable, multi-granular evidence for every verdict.
+**CATO** (Context-Aware Tool Orchestrator) is an agentic framework for detecting financial misinformation. It dynamically composes analytical pathways with a metacognitive planner, executes a task-specific **Directed Acyclic Graph (DAG)** of specialized verification tools, and fuses multi-source evidence under uncertainty to produce an auditable verdict.
 
 -----
 
-## 🚀 Key Features
+## Key Features
 
   * **Metacognitive Planning**: Instead of a fixed linear pipeline, CATO uses an LLM-based planner to generate a task-specific **Directed Acyclic Graph (DAG)** of tools based on the claim's context.
-  * **Dynamic DAG Scheduling**: A robust scheduler that handles tool dependencies, parallel execution, and "Circuit Breaker" logic (e.g., skipping factual verification if a source is deemed fundamentally untrustworthy).
-  * **Evidence Propagation (Blackboard Pattern)**: Tools share a global "Blackboard" state, allowing downstream tools to reason based on findings from upstream tools (e.g., using retrieved market data to check a specific revenue claim).
-  * **Specialized Financial Toolset**: 10 purpose-built tools covering source credibility, sentiment-fact decoupling, timeline consistency, and global common-sense reasoning.
-  * **Context-Injected Fusion**: A dual-stage synthesis engine that integrates raw evidence, tool outputs, and semantic insights to generate a calibrated veracity score.
+  * **Dynamic DAG Scheduling**: A robust scheduler that handles tool dependencies, parallel layer-wise execution, and a "circuit breaker" mechanism (e.g., skipping factual verification when the source is deemed fundamentally untrustworthy).
+  * **Evidence Propagation (Blackboard Pattern)**: Tools share a global "blackboard" state, allowing downstream tools to reason based on the findings of upstream tools.
+  * **Specialized Financial Toolset**: 9 purpose-built tools covering contextual grounding, source credibility, semantics and pragmatics, fact and time verification, and higher-order reasoning.
+  * **Context-Injected Fusion**: A dual-stage synthesis engine that compresses raw tool evidence and applies a dataset-specific golden prompt to produce a final Real/Fake verdict with an auditable explanation path.
 
 -----
 
-## 🏗️ Architecture
+## Architecture
 
 CATO is built on a modular, four-stage pipeline:
 
-1.  **Retrieval Phase**: Hybrid retrieval (BM25 + Vector Search) provides the necessary market context and policy background.
-2.  **Planning Phase**: The `MetaCognitivePlanner` analyzes the claim and generates a dependency-aware execution plan.
-3.  **Execution Phase**: The `DynamicDAGScheduler` executes tools across four layers:
-      * **L1 (Foundation)**: Claim Generation & Source Profiling.
-      * **L2 (Semantic)**: Deception Pattern Detection & Sentiment Analysis.
-      * **L3 (Verification)**: Factual Cross-checking & Timeline Validation.
-      * **L4 (Reasoning)**: Global Evidence Synthesis.
-4.  **Fusion Phase**: The `DualStageFusionEngine` synthesizes the "Blackboard" findings into a final report.
+1.  **Retrieval Phase**: `HybridRetriever` combines BM25 keyword search with FAISS vector search (precomputed 1024-dimensional embeddings) to provide the necessary market context and policy background.
+2.  **Planning Phase**: `MetaCognitivePlanner` analyzes the claim and generates a dependency-aware execution plan in JSON.
+3.  **Execution Phase**: `DynamicDAGScheduler` executes the tools layer by layer:
+      * **L1 (Grounding)**: CGT, SCP.
+      * **L2 (Semantic & Pragmatic)**: SCA, PID.
+      * **L3 (Fact & Time)**: FCV, TLV, RMD.
+      * **L4 (Higher-order Reasoning)**: EVA, CPE.
+4.  **Fusion Phase**: `DualStageFusionEngine` compresses the blackboard evidence and synthesizes the final verdict.
 
 -----
 
-## 📁 Repository Structure
+## Repository Structure
 
 | File | Description |
 | :--- | :--- |
-| `main.py` | **Core Entry Point**. Manages dataset loading, multi-threaded inference, and performance metrics calculation. |
+| `main.py` | **Core entry point**. Manages dataset loading, multi-threaded inference, and metric calculation. |
 | `Retrieval_Planner.py` | Contains the `HybridRetriever` and the LLM-based `MetaCognitivePlanner` for DAG generation. |
-| `Router_1.py` | The `DynamicDAGScheduler`. Implements topological sorting and the **Circuit Breaker** mechanism. |
-| `Toolset.py` | Implementation of the **10 analytical tools**. Each tool is optimized for a specific dimension of financial analysis. |
-| `Fusion_Engine.py` | The `DualStageFusionEngine`. Merges multi-source evidence and performs high-level reasoning for the final verdict. |
+| `Router_1.py` | The `DynamicDAGScheduler`. Implements topological layer execution and the circuit-breaker mechanism. |
+| `Toolset.py` | Implementation of the 9 analytical tools. |
+| `Fusion_Engine.py` | The `DualStageFusionEngine`. Merges multi-source evidence for the final verdict. |
 
 -----
 
-## 🛠️ The CATO Toolset (10 Specialized Tools)
+## The CATO Toolset (9 Specialized Tools)
 
-CATO utilizes a hierarchical toolset to dismantle complex financial claims:
-
-  * **CGT**: Core Grounding Tool (Retrieval analysis).
-  * **SCP**: Source Credibility Profiler.
-  * **SCA**: Semantic Conflict Analyzer.
-  * **PID**: Persuasion Intent Detector.
-  * **FCV**: Factual Cross-Verifier.
-  * **TLV**: Temporal Logic Validator.
-  * **RMD**: Raw Market Data checker.
-  * **EVA**: Global Evidence/Common-Sense Evaluator.
-  * **COM**: Contextual Orthogonality Monitor.
-  * **CPE**: Contradiction Propagation Engine (Final tool-level synthesis).
+  * **CGT**: Contextual Grounding Tool — identifies missing context or background information.
+  * **SCP**: Source Credibility Propagator — analyzes the credibility of the information source.
+  * **SCA**: Semantic Coherence Analyzer — detects internal logical contradictions within the text.
+  * **PID**: Pragmatic Intent Decoder — identifies emotional manipulation or rhetorical strategies.
+  * **FCV**: Factual Consistency Verifier — verifies factual claims against the retrieved context.
+  * **TLV**: Temporal Logic Validator — checks for chronological inconsistencies (e.g., event timing vs. report date).
+  * **RMD**: Rhetorical Manipulation Detector — detects financial hype keywords or "trap" phrases.
+  * **EVA**: Expectation Violation Analyzer — detects claims that violate common market knowledge or common sense.
+  * **CPE**: Contradiction Propagation Engine — aggregates evidence and propagates contradictions (usually the final step).
 
 -----
 
-## 🚦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
   * Python 3.9+
-  * LLM API Keys (e.g., Qwen-Max, GPT-4)
+  * DashScope (Alibaba Cloud) API keys with access to `qwen-max` and `text-embedding-v4`
 
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/CATO.git
-cd CATO
 pip install -r requirements.txt
 ```
 
 ### Configuration
 
-In `main.py`, configure your API keys in the `API_KEYS` list. CATO supports rotating keys for high-throughput batch processing.
+In `main.py`, fill in your API keys in the `API_KEYS` list. CATO rotates keys automatically for high-throughput batch processing. `BASE_URL` points to the DashScope OpenAI-compatible endpoint.
 
 ```python
-API_KEYS = ["your-key-1", "your-key-2"]
+API_KEYS = ["sk-your-api-key-1", "sk-your-api-key-2"]
 ```
 
-### Running the Evaluation
+### Data Layout
 
-To execute CATO on the FinFact or FinGuard benchmarks:
+The default paths in `main.py` expect the following layout:
+
+```
+data/
+├── DAG/Final_Combined_Data.jsonl     # knowledge base; each line needs "content" and a precomputed 1024-d "embedding"
+└── Split_data/val/
+    ├── finfact_val.json              # FinFact validation set
+    ├── Finance_FAKE_val.csv          # FinGuard fake samples
+    └── Finance_TRUE_val.csv          # FinGuard true samples
+```
+
+The retriever loads corpus embeddings directly from the JSONL `embedding` field; only queries (new news items) call the embedding API.
+
+### Running the Evaluation
 
 ```bash
 python main.py
 ```
 
------
-
-## 📈 Performance
-
-CATO achieves state-of-the-art results on financial truth-discovery benchmarks:
-
-  * **FinFact**: +11.9% F1-score improvement over standard RAG baselines.
-  * **Interpretability**: Provides a full "Trace Report" showing which tools were triggered and why.
+Results are saved to `results/evaluation_results.json`. FinFact NEI samples are filtered out, and all predictions are mapped to the binary Real/Fake setting. `TEST_PARAMS` and `MAX_CONCURRENT_ITEMS` control evaluation size and concurrency.
 
 -----
 
-## 📝 Citation
+## Citation
 
 If you find this work helpful in your research, please cite:
 
 ```bibtex
-@article{cato2024,
-  title={CATO: Context-Aware Tool Orchestration for Financial Misinformation Detection via Evidence Propagation DAG},
-  author={Your Name/Team},
-  journal={arXiv preprint},
-  year={2024}
+@article{cato2026,
+  title={CATO: Context-Aware Tool Orchestration for Detecting Financial Misinformation via Evidence-Propagation DAGs},
+  author={Anonymous},
+  journal={Under Review},
+  year={2026}
 }
 ```
-
------
-
-**Would you like me to create a `requirements.txt` file based on your imports, or help you write the specific docstrings for any of these modules?**
